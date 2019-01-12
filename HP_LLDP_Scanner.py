@@ -3,8 +3,10 @@ import csv
 from netmiko import ConnectHandler
 from netmiko.ssh_exception import NetMikoTimeoutException,NetMikoAuthenticationException
 
-# these are just simple python formatted files with variables in them
-from credentials import *
+# define our variables
+switch_ip = "enterHere" # this is for the root IP
+username = "enterHere"
+password = "enterHere"
 
 # this is where you will save the output
 #filedest = open(r'C:\Users\tcoplien\Desktop\Projects\Tools\HP_LLDP_Scanner\output.txt','w')
@@ -76,7 +78,7 @@ def getLLDPneighbors(switch_ip,switch_origin):
                     if SysName in switch_origin:    # if the switch we see on LDP is where we came from, ignore it
                         continue
                     else:   # otherwise print our nugget of information!
-                        print(Hostname + ":" + SysName + ":" + LocalPort + ":" + RemotePort + ":" + Address)
+                        print(Hostname + " : " + SysName + " : " + LocalPort + " : " + RemotePort + " : " + Address)
                     
                     # if we've found a new switch that we didn't know about, try to connect and grab more info from it
                     getLLDPneighbors(Address,Hostname)
